@@ -47,10 +47,12 @@ class Timer {
 
 
   stop() {
-    clearInterval(this.timerId);
-    this.isActive = false;
-    const time = this.getTimeComponents(0);
-    this.onTick(time);
+    
+      clearInterval(this.timerId);
+      this.isActive = false;
+      const time = this.convertMs(0);
+      this.onTick(time);
+    
   }
 
       pad(value) {
@@ -87,8 +89,10 @@ startBtn.setAttribute("disabled", true);
 
 function validation() {
   
-    if (input.valueAsNumber <= Date.now()) {
-        Swal.fire('Please choose a date in the future')
+  if (input.valueAsNumber <= Date.now()) {
+    startBtn.setAttribute("disabled", true);
+    timer.stop();
+      Swal.fire('Please choose a date in the future')
     } else { startBtn.removeAttribute("disabled") };
 }
 
